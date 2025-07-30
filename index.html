@@ -1,49 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Vital 90 Days: NZ Transition Cow Protocol</title>
-    <!-- Chosen Palette: Warm Neutrals with Earthy Accents -->
-    <!-- Application Structure Plan: The SPA is structured as a timeline-based interactive dashboard focused on the three core phases of "The Vital 90 Days": Far-Off Dry (-60 to -21 days), Springer (-21 to Calving), and Fresh Cow (0 to +30 days). This task-oriented design allows farmers to quickly access protocols relevant to a specific period. Below this primary timeline navigation, cross-cutting themes like BCS Management, a detailed Calcium Balance comparison (DCAD vs. Zeolite), a Metabolic Disease library, and a Technology section are presented. This structure was chosen because it mirrors a farmer's workflow—addressing immediate needs based on the calving schedule while also providing easy access to foundational knowledge that applies across all phases. This is more intuitive and usable than a linear report format. -->
-    <!-- Visualization & Content Choices: 
-        - Report Info: ME/DMI Requirements (Table 1) -> Goal: Inform/Compare -> Viz: Interactive Bar Chart (Chart.js) -> Interaction: Dropdown to select cow liveweight, dynamically updating chart -> Justification: More engaging and personalized than a static table, allowing users to see data for their specific herd profile.
-        - Report Info: Calcium Balance Strategies (DCAD vs. Zeolite) -> Goal: Compare/Decide -> Viz: Tabbed content/toggle buttons (HTML/JS) -> Interaction: Clicking a strategy reveals its detailed pros, cons, and implementation guide -> Justification: Provides a clear, side-by-side comparison to support a key management decision, a core focus of the report.
-        - Report Info: Metabolic Diseases -> Goal: Organize/Inform -> Viz: Accordion-style list (HTML/JS) -> Interaction: Clicking a disease name expands to show details (symptoms, prevention, treatment) -> Justification: Organizes a large amount of text into a compact, scannable format, preventing user overload.
-        - Report Info: Wearable Tech Adoption -> Goal: Inform -> Viz: Simple Bar Chart (Chart.js) -> Interaction: Static display -> Justification: A simple, effective visual to quickly convey the trend mentioned in the report.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <title>The Vital 90 Days: Comprehensive NZ Transition Cow Protocol</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Pastoral Harmony & Warm Neutrals with Earthy Accents -->
+    <!-- Application Structure Plan: The application now features a dual-layered navigation. The top section introduces "The Vital 90 Days" with a timeline-based navigation (Far-Off Dry, Springer, Fresh Cow) providing high-level overviews for each phase. Below this, a comprehensive set of detailed sections (BCS Management, Interactive Energy Requirements, DCAD/Magnesium/Ketosis, Calcium Strategies, Post-Calving/Colostrum, Holistic View, and Technology Integration) are presented. This structure allows users to first grasp the chronological flow of the transition period and then deep-dive into specific, critical management areas. This design prioritizes both a macro-level understanding and micro-level actionable insights, catering to diverse user needs. -->
+    <!-- Visualization & Content Choices: 
+        - BCS Targets: Report Info -> BCS targets and risks. Goal -> Inform/Compare. Viz/Method -> Interactive HTML/CSS visual scale. Interaction -> User selects cow type to see target and clicks risk zones for details. Justification -> More engaging and intuitive than a static table. Method -> Vanilla JS + Tailwind.
+        - DCAD Management: Report Info -> DCAD principles, targets vs. pasture levels, practical implementation, monitoring. Goal -> Compare/Explain/Organize. Viz/Method -> Chart.js Bar Chart, detailed text blocks, and key parameter cards. Interaction -> Static chart with clear labels, detailed information presented clearly. Justification -> Provides a comprehensive understanding of DCAD, its challenges in NZ, and how to implement it effectively. Method -> Chart.js + Vanilla JS + Tailwind.
+        - Calcium Strategies: Report Info -> Various post-calving calcium products and protocols. Goal -> Compare/Organize. Viz/Method -> Tabbed HTML content cards. Interaction -> User clicks tabs to switch between Bolus, Drench, and Injectable info. Justification -> Neatly organizes detailed options without overwhelming the user. Method -> Vanilla JS + Tailwind.
+        - Subclinical Ketosis & Testing: Report Info -> Ketosis impacts, testing methods (blood, urine, milk), interpretation. Goal -> Inform/Monitor. Viz/Method -> Detailed text blocks and information cards. Interaction -> Static display. Justification -> Provides crucial insights into a common metabolic disorder linked to transition stress. Method -> Vanilla JS + Tailwind.
+        - Calcium & Phosphorus Recommendations: Report Info -> General dietary levels for Ca/P during transition. Goal -> Inform. Viz/Method -> Expanded text within existing mineral balance card. Interaction -> Static display. Justification -> Clarifies overall mineral needs beyond just milk fever prevention. Method -> Vanilla JS + Tailwind.
+        - ME/DMI Requirements (Table 1) -> Goal: Inform/Compare -> Viz: Interactive Bar Chart (Chart.js) -> Interaction: Dropdown to select cow liveweight, dynamically updating chart -> Justification: Provides personalized energy targets more effectively than static data.
+        - Metabolic Diseases: Report Info -> Disease details. Goal -> Organize/Inform. Viz/Method -> Accordion-style list (HTML/JS). Interaction -> Clicking expands/collapses details. Justification -> Efficiently presents large text content. Method -> Vanilla JS + Tailwind.
+        - Wearable Tech Adoption: Report Info -> Adoption rates. Goal -> Inform. Viz/Method -> Simple Bar Chart (Chart.js). Interaction -> Static display. Justification -> Visually conveys trends. Method -> Chart.js.
+        - Economic ROI: Report Info -> Key financial metrics (5:1 ROI, 5-10% production boost). Goal -> Inform/Impact. Viz/Method -> Large, bold HTML text cards ("Key Takeaways"). Interaction -> Static display. Justification -> Highlights the most compelling financial reasons for adopting these practices. Method -> Tailwind.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FDFBF8;
-            color: #4B4B4B;
+            background-color: #FDFBF8; /* Merged: Pastoral Harmony FDFBF7, Vital 90 FDFBF8 */
+            color: #4B4B4B; /* Merged: Pastoral Harmony 5C544B, Vital 90 4B4B4B */
         }
-        .tab-active {
-            background-color: #A47E3B;
-            color: #FFFFFF;
-            border-color: #A47E3B;
+        .nav-link { /* From original TransitionApp */
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
         }
-        .tab-inactive {
-            background-color: #FFFFFF;
-            color: #A47E3B;
-            border-color: #A47E3B;
+        .nav-link:hover, .nav-link.active { /* From original TransitionApp */
+            color: #728C69; /* Pastoral Harmony accent */
+            border-bottom-color: #728C69;
         }
-        .content-section {
-            display: none;
+        .bcs-segment { /* From original TransitionApp */
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-        .content-section.active {
-            display: block;
+        .bcs-segment:hover { /* From original TransitionApp */
+            transform: translateY(-4px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
+        .bcs-segment.active { /* From original TransitionApp */
+            border-color: #728C69; /* Pastoral Harmony accent */
+            transform: scale(1.05);
+        }
+        .tab-button { /* From original TransitionApp (for Calcium Strategies) */
+            transition: all 0.3s ease;
+        }
+        .tab-button.active { /* From original TransitionApp (for Calcium Strategies) */
+            background-color: #A3B899; /* Pastoral Harmony accent */
+            color: #FDFBF7;
         }
         .chart-container {
             position: relative;
@@ -59,6 +70,34 @@
                 height: 400px;
             }
         }
+        /* Styles from The Vital 90 Days for main nav and content sections */
+        .main-header-h1 { /* Custom class for the new main title */
+            color: #A47E3B; /* Vital 90 accent */
+        }
+        .nav-tab { /* From Vital 90 Days for main timeline nav */
+            transition: all 0.3s ease;
+        }
+        .nav-tab.tab-active { /* From Vital 90 Days for main timeline nav */
+            background-color: #A47E3B; /* Vital 90 accent */
+            color: #FFFFFF;
+            border-color: #A47E3B;
+        }
+        .nav-tab.tab-inactive { /* From Vital 90 Days for main timeline nav */
+            background-color: #FFFFFF;
+            color: #A47E3B; /* Vital 90 accent */
+            border-color: #A47E3B;
+        }
+        .content-section { /* From Vital 90 Days for main timeline content */
+            display: none;
+        }
+        .content-section.active { /* From Vital 90 Days for main timeline content */
+            display: block;
+        }
+        .accordion-content { /* From Vital 90 Days for Metabolic Disease Library */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -66,7 +105,7 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <header class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-bold text-[#A47E3B] mb-2">The Vital 90 Days</h1>
+            <h1 class="text-4xl md:text-5xl font-bold main-header-h1 mb-2">The Vital 90 Days</h1>
             <p class="text-lg text-gray-600 max-w-3xl mx-auto">An Interactive Protocol for NZ Transition Cow Management</p>
             <p class="mt-4 text-gray-500 max-w-4xl mx-auto">This guide translates the comprehensive transition cow report into an actionable, day-by-day plan. Navigate through the key phases—from 60 days pre-calving to 30 days post-calving—to find targeted advice on nutrition, health, and management to ensure a productive and healthy lactation for your herd.</p>
         </header>
@@ -78,6 +117,7 @@
         </nav>
 
         <main>
+            <!-- Timeline Sections from Vital 90 Days -->
             <section id="phase1" class="content-section active">
                 <div class="bg-white p-6 md:p-8 rounded-xl shadow-md">
                     <h2 class="text-3xl font-bold text-[#A47E3B] mb-4">Phase 1: The Far-Off Dry Period (Days -60 to -21)</h2>
@@ -143,26 +183,47 @@
                     </div>
                 </div>
             </section>
-        </main>
+            <!-- End Timeline Sections -->
 
-        <div class="mt-16 space-y-12">
-            
-            <section id="bcs-management" class="bg-white p-6 md:p-8 rounded-xl shadow-md">
-                <h2 class="text-3xl font-bold text-center text-[#A47E3B] mb-4">Body Condition Score (BCS) Management</h2>
-                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Optimal BCS at calving is the single biggest determinant of a successful transition. The goal is not just to hit the average, but to minimize the variation across the herd. Management to achieve these targets must begin in late lactation.</p>
-                <div class="flex flex-col md:flex-row justify-center items-center gap-8 text-center">
-                    <div class="bg-[#FDFBF8] p-6 rounded-lg border border-gray-200 w-full md:w-1/3">
-                        <p class="text-5xl font-bold text-[#A47E3B]">5.0</p>
-                        <p class="mt-2 text-gray-700 font-semibold">Target BCS for Mature Cows</p>
+            <!-- Detailed Sections from previous Transition Cow Guide -->
+            <section id="foundation" class="mb-16 scroll-mt-20">
+                <h3 class="text-2xl font-bold text-center mb-2 text-[#728C69]">The Foundation: Dry Period & Body Condition Score (BCS)</h3>
+                <p class="text-center max-w-2xl mx-auto mb-8">A successful transition begins long before calving. Achieving the correct Body Condition Score (BCS) during the dry period is the single most important factor in preventing metabolic diseases and ensuring a productive lactation. This section helps you identify target BCS and understand the risks of missing those targets.</p>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-center mb-6">
+                        <span class="font-semibold mr-4">Select Cow Type:</span>
+                        <div class="inline-flex rounded-md shadow-sm" role="group">
+                            <button type="button" id="bcs-mature-btn" class="bcs-type-btn active px-4 py-2 text-sm font-medium bg-[#A3B899] text-white border border-gray-200 rounded-l-lg">Mature Cows</button>
+                            <button type="button" id="bcs-heifer-btn" class="bcs-type-btn px-4 py-2 text-sm font-medium bg-white hover:bg-gray-100 border-t border-b border-r border-gray-200 rounded-r-md">1st/2nd Calvers</button>
+                        </div>
                     </div>
-                    <div class="bg-[#FDFBF8] p-6 rounded-lg border border-gray-200 w-full md:w-1/3">
-                        <p class="text-5xl font-bold text-[#A47E3B]">5.5</p>
-                        <p class="mt-2 text-gray-700 font-semibold">Target BCS for 1st & 2nd Calvers</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div id="bcs-under" class="bcs-segment text-center p-4 border-2 border-dashed border-yellow-400 rounded-lg bg-yellow-50">
+                            <p class="font-bold text-lg text-yellow-800">Under-Conditioned</p>
+                            <p class="text-2xl font-bold text-yellow-600 mb-2">&lt; <span id="bcs-under-val">4.5</span></p>
+                            <p class="text-sm text-yellow-700">Click to see risks</p>
+                        </div>
+                        <div id="bcs-target" class="bcs-segment text-center p-4 border-2 border-solid border-green-500 rounded-lg bg-green-50">
+                            <p class="font-bold text-lg text-green-800">Target Zone</p>
+                            <p class="text-2xl font-bold text-green-600 mb-2" id="bcs-target-val">5.0</p>
+                            <p class="text-sm text-green-700">Optimal for calving</p>
+                        </div>
+                        <div id="bcs-over" class="bcs-segment text-center p-4 border-2 border-dashed border-red-400 rounded-lg bg-red-50">
+                            <p class="font-bold text-lg text-red-800">Over-Conditioned</p>
+                            <p class="text-2xl font-bold text-red-600 mb-2">&gt; <span id="bcs-over-val">5.0</span></p>
+                            <p class="text-sm text-red-700">Click to see risks</p>
+                        </div>
+                    </div>
+
+                    <div id="bcs-info-box" class="p-4 rounded-lg bg-gray-100 text-center min-h-[80px] flex items-center justify-center">
+                        <p class="text-gray-600">Select a risk zone (Under or Over-Conditioned) to learn more.</p>
                     </div>
                 </div>
             </section>
-            
-            <section id="energy-intake" class="bg-white p-6 md:p-8 rounded-xl shadow-md">
+
+            <section id="energy-intake" class="bg-white p-6 md:p-8 rounded-xl shadow-md mt-16">
                 <h2 class="text-3xl font-bold text-center text-[#A47E3B] mb-4">Interactive Pre-Calving Energy Requirements</h2>
                 <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Select a cow's liveweight to see the recommended daily Metabolisable Energy (ME) and Dry Matter Intake (DMI) targets during the pre-calving period. This helps prevent over-conditioning in fatter cows while ensuring thinner cows are adequately fed.</p>
                 <div class="flex justify-center mb-6">
@@ -179,161 +240,293 @@
                 </div>
             </section>
 
-            <section id="calcium-balance" class="bg-white p-6 md:p-8 rounded-xl shadow-md">
-                <h2 class="text-3xl font-bold text-center text-[#A47E3B] mb-4">Calcium Balance: DCAD vs. Synthetic Zeolite</h2>
-                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Preventing milk fever is critical. Both negative DCAD diets and Synthetic Zeolite are effective strategies, but they work differently and have different implementation requirements. Use this tool to compare them and decide which is best for your system.</p>
-                <div class="flex justify-center mb-8">
-                    <div class="inline-flex rounded-md shadow-sm" role="group">
-                        <button type="button" id="dcad-btn" class="calcium-tab tab-active px-6 py-3 text-sm font-medium border rounded-l-lg focus:z-10 focus:ring-2 focus:ring-[#A47E3B]">
-                            Negative DCAD
-                        </button>
-                        <button type="button" id="zeolite-btn" class="calcium-tab tab-inactive px-6 py-3 text-sm font-medium border rounded-r-lg focus:z-10 focus:ring-2 focus:ring-[#A47E3B]">
-                            Synthetic Zeolite
-                        </button>
+            <section id="priming" class="mb-16 scroll-mt-20">
+                <h3 class="text-2xl font-bold text-center mb-2 text-[#728C69]">Priming the System: Pre-Calving (3 Weeks Out) - Detailed</h3>
+                <p class="text-center max-w-2xl mx-auto mb-8">This section provides a deeper dive into the strategies for ensuring adequate magnesium supply and managing the diet's DCAD to "wake up" her internal calcium mobilization systems.</p>
+
+                <div class="flex flex-col gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h4 class="font-bold text-xl text-center mb-4">Magnesium: The Calcium Gatekeeper</h4>
+                        <p class="mb-4 text-sm">Magnesium is essential for absorbing calcium from the gut and mobilizing it from bone. Without it, other calcium strategies fail. Aim for 20g of elemental Mg per cow per day.</p>
+                        <div class="space-y-3 text-sm">
+                            <div class="p-3 bg-gray-50 rounded-md"><strong>Pasture Dusting (MgO):</strong> Common, but double or triple the rate in wet weather to account for wastage.</div>
+                            <div class="p-3 bg-gray-50 rounded-md"><strong>Water Troughs (MgCl/MgSO4):</strong> Can reduce water palatability at high doses. Best used in combination with other methods.</div>
+                            <div class="p-3 bg-gray-50 rounded-md"><strong>Mixed Feed (MgO):</strong> Effective on feed pads, but account for 5-15% wastage depending on the feeding system.</div>
+                        </div>
+                        <p class="mt-4 text-xs text-center font-semibold text-red-600">Warning: High potassium in pasture (common in NZ) interferes with Mg absorption. Avoid effluent paddocks for springers.</p>
                     </div>
-                </div>
-                <div id="dcad-content" class="calcium-content active">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <h4 class="font-semibold text-lg mb-2 text-gray-800">How it Works</h4>
-                            <p class="text-gray-600">Induces a mild metabolic acidosis, which "primes" the cow's natural systems to mobilize calcium from bone and increase absorption from the gut. This prepares her for the sudden demand at calving.</p>
+
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h4 class="font-bold text-xl text-center mb-4">DCAD: Activating Calcium Reserves</h4>
+                        <p class="mb-4 text-sm">By feeding a negative Dietary Cation-Anion Difference (DCAD) diet, you induce a mild metabolic acidosis, which primes the cow to mobilize her own calcium reserves efficiently at calving. This proactive approach significantly reduces the risk of clinical and subclinical milk fever.</p>
+                        <div class="chart-container">
+                            <canvas id="dcadChart"></canvas>
                         </div>
-                        <div>
-                            <h4 class="font-semibold text-lg mb-2 text-gray-800">Implementation</h4>
-                            <p class="text-gray-600">Requires precise feed analysis, use of low-potassium forages, and anionic salt supplements. Urine pH must be monitored regularly, aiming for a target of 5.5-6.0.</p>
+                        <p class="text-center mt-4 text-sm">The chart above illustrates the stark contrast between typical NZ pasture DCAD and the target for pre-calving diets. This "metabolic training" activates the cow's endogenous calcium mobilization system, making her more efficient at drawing calcium from bone reserves and absorbing it from the diet *before* the massive demand of lactation begins.</p>
+
+                        <h5 class="font-bold text-lg mt-8 mb-2">Practical DCAD Implementation</h5>
+                        <p class="mb-4 text-sm">Optimal negative DCAD ranges are generally **-8 to -12 meq/100g DM**, but avoid going below -15 meq/100g DM to prevent excessive acidification and reduced feed intake. This diet is typically fed for the **last 2-3 weeks (14-21 days)** prior to expected calving, though up to 42 days can also be effective.</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-6">
+                            <div class="p-3 bg-gray-50 rounded-md">
+                                <p class="font-semibold">Feed Analysis is Crucial:</p>
+                                <p>Thorough chemical analysis of feed ingredients is vital to accurately determine DCAD levels.</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-md">
+                                <p class="font-semibold">Minimize High Potassium Forages:</p>
+                                <p>Avoid or limit effluent-grazed pastures or other high-potassium feeds.</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-md">
+                                <p class="font-semibold">Anionic Supplements:</p>
+                                <p>To achieve a negative DCAD, the diet is adjusted with anionic supplements. Common examples include **magnesium sulphate** and **ammonium chloride**. These compounds provide negatively charged ions that help acidify the cow's blood, thereby stimulating her calcium mobilization system. Commercial anionic pre-calving nuts or pellets are also available in New Zealand, specifically formulated with these salts, along with starch, protein, vitamins, and trace minerals. These are typically fed at a rate of 2kg per cow per day. The choice of anionic salt depends on palatability, cost, and the specific dietary needs of the herd.</p>
+                            </div>
+                            <div class="p-3 bg-gray-50 rounded-md">
+                                <p class="font-semibold">Ensure Mineral Balance (Calcium & Phosphorus):</p>
+                                <p>Alongside DCAD adjustment, it is essential to provide adequate levels of other key minerals. Ensure sufficient **magnesium** (>0.40% DM), **calcium**, and **phosphorus**. While the DCAD diet aims to activate calcium mobilization, research shows that feeding more than **180 grams of dietary calcium** with a fully acidogenic diet makes cows more resistant to drops in serum calcium concentrations. This indicates that while restricting calcium *can* prime the system, ensuring sufficient overall calcium *intake* within an acidogenic diet is also beneficial. Phosphorus is crucial for energy metabolism and bone health; its balance with calcium is vital for overall mineral homeostasis.</p>
+                            </div>
                         </div>
-                        <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-green-800">Pros</h4>
-                            <ul class="list-disc list-inside text-green-700 mt-2">
-                                <li>Gold standard, well-researched.</li>
-                                <li>Reduces both clinical and subclinical milk fever.</li>
-                                <li>Can improve early lactation milk production.</li>
-                            </ul>
+
+                        <h5 class="font-bold text-lg mt-8 mb-2">Monitoring DCAD Effectiveness</h5>
+                        <p class="mb-4 text-sm">Regular monitoring ensures your DCAD program is working as intended. Urine pH is a key indicator.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                            <div class="p-3 bg-blue-50 rounded-md">
+                                <p class="font-semibold">Urine pH Target (Holsteins):</p>
+                                <p><strong>6.0-6.8</strong>. Test at least 3 days after starting the DCAD diet.</p>
+                            </div>
+                            <div class="p-3 bg-blue-50 rounded-md">
+                                <p class="font-semibold">Urine pH Target (Jerseys):</p>
+                                <p><strong>5.5-6.0</strong>. Account for breed-specific metabolic differences.</p>
+                            </div>
+                            <div class="p-3 bg-blue-50 rounded-md col-span-full">
+                                <p class="font-semibold">Blood Testing:</p>
+                                <p>On day 3 calved cows, blood tests for energy and trace elements provide valuable feedback on transition progress. Note: DCAD diets can potentially harm reproduction in first-calf heifers; consult your nutritionist.</p>
+                            </div>
                         </div>
-                        <div class="bg-red-50 border border-red-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-red-800">Cons</h4>
-                            <ul class="list-disc list-inside text-red-700 mt-2">
-                                <li>Challenging and costly in NZ pasture systems due to high potassium.</li>
-                                <li>High implementation complexity.</li>
-                                <li>Potential for palatability issues.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div id="zeolite-content" class="calcium-content hidden">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <h4 class="font-semibold text-lg mb-2 text-gray-800">How it Works</h4>
-                            <p class="text-gray-600">Binds to dietary calcium and phosphorus in the rumen, preventing their absorption. This temporary deficiency stimulates the cow to upregulate her own calcium mobilization systems in preparation for calving.</p>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-lg mb-2 text-gray-800">Implementation</h4>
-                            <p class="text-gray-600">Simpler to implement. Fed at 500g/cow/day for 2-3 weeks pre-calving. Must be stopped immediately at calving. Requires ongoing magnesium supplementation. No urine pH testing needed.</p>
-                        </div>
-                        <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-green-800">Pros</h4>
-                            <ul class="list-disc list-inside text-green-700 mt-2">
-                                <li>Effective in NZ pasture systems.</li>
-                                <li>Simple to use, less sensitive to pasture potassium.</li>
-                                <li>Proven by DairyNZ trials.</li>
-                            </ul>
-                        </div>
-                        <div class="bg-red-50 border border-red-200 p-4 rounded-lg">
-                            <h4 class="font-semibold text-red-800">Cons</h4>
-                            <ul class="list-disc list-inside text-red-700 mt-2">
-                                <li>Not recommended with low-phosphorus diets (e.g., fodder beet).</li>
-                                <li>Must ensure adequate magnesium levels.</li>
-                                <li>Only specific synthetic forms are effective.</li>
-                            </ul>
+
+                        <h5 class="font-bold text-lg mt-8 mb-2">Ketosis Monitoring: Beyond Calcium</h5>
+                        <p class="mb-4 text-sm">**Subclinical ketosis** (SCK) is a common metabolic disorder during early lactation, often occurring when the cow's energy intake cannot meet the demands of milk production, leading to excessive fat mobilization and the accumulation of ketone bodies (e.g., BHBA). SCK can significantly impact milk yield, reproductive performance, and increase the risk of other diseases like displaced abomasum and metritis, even without visible clinical signs.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                            <div class="p-3 bg-yellow-50 rounded-md">
+                                <p class="font-semibold">Blood Testing (BHBA):</p>
+                                <p>The most accurate method. Collect blood samples from a representative group of cows (e.g., 10-15 cows) between 5-15 days in milk. A BHBA concentration of **>1.2 mmol/L** indicates subclinical ketosis. Portable meters (e.g., Precision Xtra) provide rapid on-farm results.</p>
+                            </div>
+                            <div class="p-3 bg-yellow-50 rounded-md">
+                                <p class="font-semibold">Milk Testing (Ketone Strips):</p>
+                                <p>Less accurate than blood but useful for rapid screening. Dip test strips into milk samples. A positive reaction indicates the presence of ketones. Useful for identifying high-risk cows for further investigation.</p>
+                            </div>
+                            <div class="p-3 bg-yellow-50 rounded-md">
+                                <p class="font-semibold">Urine Testing (Ketone Strips):</p>
+                                <p>Similar to milk strips, provides a quick qualitative assessment. Best used as a preliminary screening tool. Ensure fresh urine samples are collected.</p>
+                            </div>
+                            <div class="p-3 bg-yellow-50 rounded-md">
+                                <p class="font-semibold">Clinical Signs of Ketosis:</p>
+                                <p>In severe cases, cows may show reduced appetite (especially for concentrates), decreased milk production, weight loss, dull coat, and sometimes nervous signs (e.g., licking, aggression). Early detection of SCK prevents progression to clinical ketosis.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="metabolic-diseases" class="bg-white p-6 md:p-8 rounded-xl shadow-md">
-                <h2 class="text-3xl font-bold text-center text-[#A47E3B] mb-4">Metabolic Disease Library</h2>
-                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Metabolic diseases are often interconnected. Proactive prevention through nutrition and management is the best strategy. Click on a disease to learn more about its symptoms, prevention, and treatment.</p>
-                <div class="space-y-4" id="accordion-container">
-                    <div class="accordion-item border border-gray-200 rounded-lg">
-                        <button class="accordion-header w-full text-left p-4 bg-gray-50 hover:bg-gray-100 transition flex justify-between items-center">
-                            <span class="font-semibold text-lg text-gray-700">Milk Fever (Hypocalcemia)</span>
-                            <span class="accordion-icon text-2xl text-[#A47E3B]">+</span>
-                        </button>
-                        <div class="accordion-content p-4 border-t border-gray-200">
-                            <p><strong>Symptoms:</strong> Staggering, cold ears, inability to stand (clinical). Impaired muscle function, reduced feed intake (subclinical).</p>
-                            <p><strong>Prevention:</strong> Negative DCAD or Zeolite pre-calving, robust Magnesium supplementation, aggressive Calcium supplementation post-calving.</p>
-                            <p><strong>Treatment:</strong> IV or subcutaneous calcium, supportive care.</p>
+            <section id="calving" class="mb-16 scroll-mt-20">
+                <h3 class="text-2xl font-bold text-center mb-2 text-[#728C69]">The Main Event: Calcium Support At Calving</h3>
+                <p class="text-center max-w-2xl mx-auto mb-8">At calving, the demand for calcium explodes. Even with perfect pre-calving prep, direct calcium supplementation is crucial to prevent subclinical and clinical milk fever. This section compares the primary options for immediate support.</p>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="mb-6 border-b border-gray-200">
+                        <div class="flex flex-wrap -mb-px justify-center">
+                            <button class="tab-button active mr-2 mb-2 inline-block p-3 border-b-2 border-transparent rounded-t-lg" data-tab="bolus">Oral Bolus</button>
+                            <button class="tab-button mr-2 mb-2 inline-block p-3 border-b-2 border-transparent rounded-t-lg" data-tab="drench">Oral Drench</button>
+                            <button class="tab-button mb-2 inline-block p-3 border-b-2 border-transparent rounded-t-lg" data-tab="injectable">Injectable</button>
                         </div>
                     </div>
-                    <div class="accordion-item border border-gray-200 rounded-lg">
-                        <button class="accordion-header w-full text-left p-4 bg-gray-50 hover:bg-gray-100 transition flex justify-between items-center">
-                            <span class="font-semibold text-lg text-gray-700">Ketosis</span>
-                            <span class="accordion-icon text-2xl text-[#A47E3B]">+</span>
-                        </button>
-                        <div class="accordion-content p-4 border-t border-gray-200">
-                            <p><strong>Symptoms:</strong> Reduced DMI, drop in milk, lethargy, sweet-smelling breath. Caused by severe negative energy balance.</p>
-                            <p><strong>Prevention:</strong> Calve cows at optimal BCS (not over-conditioned), maximize DMI post-calving, ensure adequate energy intake.</p>
-                            <p><strong>Treatment:</strong> Oral glucose precursors (e.g., propylene glycol), IV glucose in severe cases.</p>
+                    <div id="tab-content">
+                        <div class="tab-pane active" id="bolus">
+                            <h5 class="font-bold text-lg mb-2">Oral Calcium Boluses</h5>
+                            <p class="mb-4 text-sm">A convenient and effective method for sustained calcium delivery. Easy to administer and avoids palatability issues.</p>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="font-semibold">Key Feature: Sustained Release</p>
+                                    <p>Products often combine fast and slow-release calcium sources to maintain blood levels for up to 48 hours.</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="font-semibold">Protocol</p>
+                                    <p>Typically 1-2 boluses given as soon as possible after calving, with a possible second dose 12-15 hours later.</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="font-semibold">Calcium Payload</p>
+                                    <p>High. A single dose can provide 40-50g of calcium, often 3x more than an injectable bottle.</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="font-semibold">Best For</p>
+                                    <p>All cows, but especially high-risk animals (older, Jerseys, high BCS). Prophylactic use to prevent milk fever.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="accordion-item border border-gray-200 rounded-lg">
-                        <button class="accordion-header w-full text-left p-4 bg-gray-50 hover:bg-gray-100 transition flex justify-between items-center">
-                            <span class="font-semibold text-lg text-gray-700">Retained Fetal Membranes (RFM) & Metritis</span>
-                            <span class="accordion-icon text-2xl text-[#A47E3B]">+</span>
-                        </button>
-                        <div class="accordion-content p-4 border-t border-gray-200">
-                            <p><strong>Symptoms:</strong> Visible membranes >24hrs post-calving (RFM). Foul-smelling discharge, fever, depression (Metritis).</p>
-                            <p><strong>Prevention:</strong> Good transition nutrition (especially calcium), hygiene at calving, minimize calving difficulties, maintain optimal BCS.</p>
-                            <p><strong>Treatment:</strong> Supportive care for RFM (do not manually remove). Systemic antibiotics and anti-inflammatories for metritis.</p>
+                        <div class="tab-pane hidden" id="drench">
+                            <h5 class="font-bold text-lg mb-2">Oral Calcium Drenches</h5>
+                            <p class="mb-4 text-sm">A cost-effective liquid option for providing immediate calcium and other nutrients.</p>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="font-semibold">Key Feature: Cost-Effective</p>
+                                    <p>Often a cheaper alternative to boluses for broad application across the herd.</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="font-semibold">Protocol</p>
+                                    <p>Administered as a single drench at the point of calving.</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="font-semibold">Considerations</p>
+                                    <p>Can be more difficult to administer correctly than a bolus. Risk of aspiration if not done carefully.</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="font-semibold">Best For</p>
+                                    <p>Targeting at-risk animals. Can also support gut motility and has been linked to improved conception rates.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                     <div class="accordion-item border border-gray-200 rounded-lg">
-                        <button class="accordion-header w-full text-left p-4 bg-gray-50 hover:bg-gray-100 transition flex justify-between items-center">
-                            <span class="font-semibold text-lg text-gray-700">Grass Staggers (Hypomagnesemia)</span>
-                            <span class="accordion-icon text-2xl text-[#A47E3B]">+</span>
-                        </button>
-                        <div class="accordion-content p-4 border-t border-gray-200">
-                            <p><strong>Symptoms:</strong> Nervousness, stiff staggering walk, muscle tremors, seizures, sudden death. Caused by magnesium deficiency.</p>
-                            <p><strong>Prevention:</strong> Consistent magnesium supplementation pre- and post-calving (20g/day pre, 15-20g/day post). Be aware of high potassium pastures reducing Mg absorption.</p>
-                            <p><strong>Treatment:</strong> Immediate veterinary assistance for magnesium therapy.</p>
+                        <div class="tab-pane hidden" id="injectable">
+                            <h5 class="font-bold text-lg mb-2">Injectable Calcium (Subcutaneous)</h5>
+                            <p class="mb-4 text-sm">Primarily a treatment for clinical milk fever (down cows), not a preventative tool for the whole herd.</p>
+                            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                                <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                                    <p class="font-semibold text-red-700">Use Case: Treatment, Not Prevention</p>
+                                    <p>Reserved for cows showing clinical signs of milk fever, under veterinary guidance.</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="font-semibold">Protocol</p>
+                                    <p>Warm solution before use. Administer under the skin in at least 5 different spots, massaging each site.</p>
+                                </div>
+                                <div class="p-4 bg-gray-50 rounded-lg">
+                                    <p class="font-semibold">Calcium Payload</p>
+                                    <p>Relatively low (~12g per bottle). Provides a rapid spike but is not sustained.</p>
+                                </div>
+                                <div class="p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                                    <p class="font-semibold text-yellow-700">Crucial Follow-Up</p>
+                                    <p>Once the cow is sitting up and can swallow, she MUST receive an oral calcium source (bolus or drench) to prevent relapse.</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="tech-integration" class="bg-white p-6 md:p-8 rounded-xl shadow-md">
-                <h2 class="text-3xl font-bold text-center text-[#A47E3B] mb-4">Technology Integration</h2>
-                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Wearable technology is transforming proactive health management. These devices provide real-time data on rumination and eating behavior, allowing for early detection of health issues before clinical signs appear.</p>
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-3 text-gray-700">Proactive Health Monitoring</h3>
-                        <p class="text-gray-600 mb-4">A drop in rumination relative to a cow's own baseline is a powerful early indicator of potential problems like ketosis, metritis, or lameness. This allows for early intervention, reducing the severity and cost of disease.</p>
-                        <h4 class="font-semibold text-lg mb-2 text-gray-800">Key Benefits:</h4>
-                        <ul class="list-disc list-inside space-y-2 text-gray-600">
-                            <li>Early disease detection.</li>
-                            <li>Automated heat detection.</li>
-                            <li>Reduced on-farm workload.</li>
-                            <li>Data-driven management decisions.</li>
-                        </ul>
-                    </div>
-                    <div class="chart-container h-64 md:h-80">
-                         <canvas id="techAdoptionChart"></canvas>
                     </div>
                 </div>
             </section>
 
-        </div>
+            <section id="recovery" class="mb-16 scroll-mt-20">
+                <h3 class="text-2xl font-bold text-center mb-2 text-[#728C69]">The Recovery: Post-Calving & Colostrum Period</h3>
+                <p class="text-center max-w-2xl mx-auto mb-8">The first few weeks of lactation are a race to close the "energy gap". The cow's intake lags behind her massive energy output for milk production. The goals are to rapidly increase Dry Matter Intake (DMI), maintain rumen health, and produce high-quality colostrum for the calf.</p>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h4 class="font-bold text-xl text-center mb-4">Feeding the Cow: Closing the Energy Gap</h4>
+                        <p class="mb-4 text-sm">The colostrum mob is the highest priority on the farm. They need unlimited access to the best quality pasture, plus strategic supplementation to meet energy demands and prevent acidosis.</p>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <p class="font-semibold">Pasture is Key</p>
+                                <p class="text-sm">Provide the highest quality pasture available. Avoid low-fibre, high-nitrogen second-round pasture if possible to reduce acidosis risk.</p>
+                            </div>
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <p class="font-semibold">Strategic Supplementation</p>
+                                <p class="text-sm">Most cows, especially high-producing animals, need 1-2 kg/day of supplement (e.g., silage, concentrates) to balance energy. This is critical for cows calving at lower BCS.</p>
+                            </div>
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <p class="font-semibold">Fibre for Rumen Health</p>
+                                <p class="text-sm">Offer long fibre (hay, straw) to maintain rumen function, especially if feeding high-sugar crops. Rumen buffers or live yeast can also help.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h4 class="font-bold text-xl text-center mb-4">Feeding the Calf: Colostrum is Gold</h4>
+                        <p class="mb-4 text-sm">A healthy cow produces high-quality colostrum, which is vital for calf immunity and lifetime productivity. Success depends on the "3 Qs".</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4 p-4 bg-yellow-50 rounded-lg">
+                                <span class="text-3xl font-bold text-yellow-500">Q1</span>
+                                <div>
+                                    <p class="font-semibold">Quality</p>
+                                    <p class="text-sm">Use "gold" (first milking) colostrum. Test with a Brix refractometer if possible (target >22%).</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4 p-4 bg-yellow-50 rounded-lg">
+                                <span class="text-3xl font-bold text-yellow-500">Q2</span>
+                                <div>
+                                    <p class="font-semibold">Quantity</p>
+                                    <p class="text-sm">Feed 10-15% of bodyweight (e.g., 4-6 litres for a 40kg calf) within the first 12 hours.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4 p-4 bg-yellow-50 rounded-lg">
+                                <span class="text-3xl font-bold text-yellow-500">Q3</span>
+                                <div>
+                                    <p class="font-semibold">Quickly</p>
+                                    <p class="text-sm">Absorption of antibodies ceases after 24 hours. The first feed within 6 hours is critical.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="holistic" class="scroll-mt-20">
+                <h3 class="text-2xl font-bold text-center mb-2 text-[#728C69]">The Big Picture: Holistic Management & ROI</h3>
+                <p class="text-center max-w-2xl mx-auto mb-8">A successful transition isn't just about feed. It's about a complete system of monitoring, planning, and team execution. Investing in this system provides one of the best returns on investment available in dairy farming.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h4 class="font-bold text-lg mb-2">Trace Elements</h4>
+                        <p class="text-sm">The transition period places the highest demand on trace elements like copper, selenium, and zinc. Pre-calving supplementation can boost immune response and reduce mastitis.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h4 class="font-bold text-lg mb-2">Proactive Monitoring</h4>
+                        <p class="text-sm">Don't wait for problems. Use blood tests on day 3 calved cows early in the season to check energy and mineral status, allowing for timely adjustments to your plan.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h4 class="font-bold text-lg mb-2">Protocols & Training</h4>
+                        <p class="text-sm">Develop clear, simple treatment protocols with your vet. Ensure all staff are trained, equipped, and confident in executing the plan consistently.</p>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <h4 class="font-bold text-xl text-center mb-4">The Economic Payoff</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                        <div class="p-6 bg-green-100 rounded-xl border-2 border-green-200">
+                            <p class="text-4xl font-bold text-green-700">5:1</p>
+                            <p class="font-semibold mt-1">Return on Investment</p>
+                            <p class="text-sm">From production gains alone over the cost of transition feeding.</p>
+                        </div>
+                        <div class="p-6 bg-green-100 rounded-xl border-2 border-green-200">
+                            <p class="text-4xl font-bold text-green-700">5-10%</p>
+                            <p class="font-semibold mt-1">Increase in Lactation Production</p>
+                            <p class="text-sm">Plus improved 6-week in-calf rates and reduced culling.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Detailed Sections -->
+
+        </main>
+
     </div>
+
+    <footer class="bg-gray-100 mt-16">
+        <div class="container mx-auto px-4 py-6 text-center text-gray-500 text-sm">
+            <p>This interactive tool is based on a synthesis of current research for New Zealand pasture-based systems. Always consult with your veterinarian and nutritionist to develop a plan tailored to your specific herd and farm conditions.</p>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Elements for main timeline navigation
             const navTabs = document.querySelectorAll('.nav-tab');
             const contentSections = document.querySelectorAll('.content-section');
-            const liveweightSelector = document.getElementById('liveweight-selector');
-            const accordionContainer = document.getElementById('accordion-container');
-            const calciumTabs = document.querySelectorAll('.calcium-tab');
-            const calciumContents = document.querySelectorAll('.calcium-content');
 
+            // Elements for BCS section
+            const bcsMatureBtn = document.getElementById('bcs-mature-btn');
+            const bcsHeiferBtn = document.getElementById('bcs-heifer-btn');
+            const bcsUnderVal = document.getElementById('bcs-under-val');
+            const bcsTargetVal = document.getElementById('bcs-target-val');
+            const bcsOverVal = document.getElementById('bcs-over-val');
+            const bcsInfoBox = document.getElementById('bcs-info-box');
+            const bcsSegments = document.querySelectorAll('.bcs-segment');
+
+            // Elements for Energy Chart
+            const liveweightSelector = document.getElementById('liveweight-selector');
             const energyData = {
                 350: { above: [76, 6.9], below: [85, 7.7] },
                 400: { above: [84, 7.6], below: [94, 7.5] },
@@ -341,10 +534,17 @@
                 500: { above: [100, 9.2], below: [111, 10.1] },
                 550: { above: [107, 9.7], below: [119, 10.8] }
             };
-
             let energyChart;
-            let techChart;
 
+            // Elements for DCAD Chart
+            const dcadCtx = document.getElementById('dcadChart').getContext('2d');
+            let dcadChartInstance; // To store the Chart.js instance
+
+            // Elements for Calcium Strategy Tabs
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            // Chart Creation Functions
             function createEnergyChart(weight) {
                 const data = energyData[weight];
                 const ctx = document.getElementById('energyChart').getContext('2d');
@@ -410,38 +610,56 @@
                 });
             }
             
-            function createTechAdoptionChart() {
-                const ctx = document.getElementById('techAdoptionChart').getContext('2d');
-                techChart = new Chart(ctx, {
+            function createDcadChart() {
+                if (dcadChartInstance) {
+                    dcadChartInstance.destroy();
+                }
+                dcadChartInstance = new Chart(dcadCtx, {
                     type: 'bar',
                     data: {
-                        labels: ['2018', '2023'],
+                        labels: ['Typical NZ Pasture', 'Target Pre-Calving Diet'],
                         datasets: [{
-                            label: 'Cows with Wearables (%)',
-                            data: [3, 18],
-                            backgroundColor: ['#D6C3A2', '#A47E3B'],
+                            label: 'DCAD (meq/100g DM)',
+                            data: [40, -10],
+                            backgroundColor: [
+                                'rgba(239, 68, 68, 0.6)',
+                                'rgba(34, 197, 94, 0.6)'
+                            ],
+                            borderColor: [
+                                'rgba(239, 68, 68, 1)',
+                                'rgba(34, 197, 94, 1)'
+                            ],
+                            borderWidth: 1
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        indexAxis: 'y',
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: 'DCAD Value'
+                                }
+                            }
+                        },
                         plugins: {
                             legend: {
                                 display: false
                             },
-                            title: {
-                                display: true,
-                                text: 'Wearable Tech Adoption in NZ Herds',
-                                font: { size: 16 }
-                            }
-                        },
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: '%'
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y + ' meq/100g DM';
+                                        }
+                                        return label;
+                                    }
                                 }
                             }
                         }
@@ -449,6 +667,7 @@
                 });
             }
 
+            // Event Listeners
             navTabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     const target = tab.dataset.target;
@@ -470,63 +689,78 @@
                 });
             });
             
-            calciumTabs.forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    const targetId = e.currentTarget.id.replace('-btn', '-content');
-                    
-                    calciumTabs.forEach(t => {
-                        t.classList.remove('tab-active');
-                        t.classList.add('tab-inactive');
-                    });
-                    e.currentTarget.classList.add('tab-active');
-                    e.currentTarget.classList.remove('tab-inactive');
-                    
-                    calciumContents.forEach(content => {
-                        if(content.id === targetId) {
-                            content.classList.remove('hidden');
-                            content.classList.add('active');
-                        } else {
-                            content.classList.add('hidden');
-                            content.classList.remove('active');
-                        }
-                    });
-                });
+            bcsMatureBtn.addEventListener('click', () => {
+                setBcsTargets(true);
+                bcsMatureBtn.classList.add('active', 'bg-[#A3B899]', 'text-white');
+                bcsMatureBtn.classList.remove('bg-white', 'hover:bg-gray-100');
+                bcsHeiferBtn.classList.remove('active', 'bg-[#A3B899]', 'text-white');
+                bcsHeiferBtn.classList.add('bg-white', 'hover:bg-gray-100');
             });
 
-            if (accordionContainer) {
-                accordionContainer.addEventListener('click', function(e) {
-                    const header = e.target.closest('.accordion-header');
-                    if (!header) return;
-
-                    const item = header.parentElement;
-                    const content = header.nextElementSibling;
-                    const icon = header.querySelector('.accordion-icon');
-                    const isOpen = content.style.maxHeight;
-
-                    // Close all other items
-                    item.parentElement.querySelectorAll('.accordion-item').forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.querySelector('.accordion-content').style.maxHeight = null;
-                            otherItem.querySelector('.accordion-icon').textContent = '+';
-                        }
-                    });
-
-                    if (isOpen) {
-                        content.style.maxHeight = null;
-                        icon.textContent = '+';
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                        icon.textContent = '-';
-                    }
-                });
-            }
+            bcsHeiferBtn.addEventListener('click', () => {
+                setBcsTargets(false);
+                bcsHeiferBtn.classList.add('active', 'bg-[#A3B899]', 'text-white');
+                bcsHeiferBtn.classList.remove('bg-white', 'hover:bg-gray-100');
+                bcsMatureBtn.classList.remove('active', 'bg-[#A3B899]', 'text-white');
+                bcsMatureBtn.classList.add('bg-white', 'hover:bg-gray-100');
+            });
             
+            document.getElementById('bcs-under').addEventListener('click', (e) => {
+                bcsInfoBox.innerHTML = '<p class="font-semibold">Risks of Under-Conditioning:</p><p>Increased susceptibility to infectious diseases like metritis and mastitis, and generally poorer immune function.</p>';
+                bcsSegments.forEach(seg => seg.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+            });
+
+            document.getElementById('bcs-over').addEventListener('click', (e) => {
+                bcsInfoBox.innerHTML = '<p class="font-semibold">Risks of Over-Conditioning:</p><p>Higher risk of metabolic diseases (milk fever, ketosis, fatty liver) and greater depression in feed intake at calving.</p>';
+                bcsSegments.forEach(seg => seg.classList.remove('active'));
+                e.currentTarget.classList.add('active');
+            });
+            
+            document.getElementById('bcs-target').addEventListener('click', (e) => {
+                 bcsInfoBox.innerHTML = '<p class="font-semibold text-green-700">This is the optimal condition for calving.</p><p>Cows in this range have the lowest risk of both metabolic and infectious diseases, setting them up for a successful lactation.</p>';
+                 bcsSegments.forEach(seg => seg.classList.remove('active'));
+                 e.currentTarget.classList.add('active');
+            });
+
             liveweightSelector.addEventListener('change', (e) => {
                 createEnergyChart(e.target.value);
             });
 
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    tabPanes.forEach(pane => {
+                        if (pane.id === tabId) {
+                            pane.classList.remove('hidden');
+                            pane.classList.add('active');
+                        } else {
+                            pane.classList.add('hidden');
+                            pane.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
+            // BCS target setting function
+            function setBcsTargets(isMature) {
+                const target = isMature ? '5.0' : '5.5';
+                const under = isMature ? '4.5' : '5.0';
+                bcsTargetVal.textContent = target;
+                bcsUnderVal.textContent = under;
+                bcsOverVal.textContent = target;
+                bcsInfoBox.innerHTML = '<p class="text-gray-600">Select a risk zone (Under or Over-Conditioned) to learn more.</p>';
+                bcsSegments.forEach(seg => seg.classList.remove('active'));
+            }
+
+            // Initial calls for charts and BCS
             createEnergyChart(liveweightSelector.value);
-            createTechAdoptionChart();
+            createDcadChart();
+            setBcsTargets(true); // Initialize BCS for mature cows
         });
     </script>
 </body>
