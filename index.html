@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Pastoral Harmony & Warm Neutrals with Earthy Accents -->
-    <!-- Application Structure Plan: The application now features a dual-layered navigation. The top section introduces "The Vital 90 Days" with a timeline-based navigation (Far-Off Dry, Springer, Fresh Cow) providing high-level overviews for each phase. Below this, a comprehensive set of detailed sections (BCS Management, Interactive Energy Requirements, DCAD/Magnesium/Ketosis, Calcium Strategies, Post-Calving/Colostrum, Holistic View, and Technology Integration) are presented. This structure allows users to first grasp the chronological flow of the transition period and then deep-dive into specific, critical management areas. This design prioritizes both a macro-level understanding and micro-level actionable insights, catering to diverse user needs. -->
+    <!-- Application Structure Plan: The application now features a dual-layered navigation. The top section introduces "The Vital 90 Days" with a timeline-based navigation (Far-Off Dry, Springer, Fresh Cow) providing high-level overviews for each phase. Below this, a comprehensive set of detailed sections (BCS Management, Interactive Energy Requirements, DCAD/Magnesium/Ketosis, Calcium Strategies, Post-Calving/Colostrum, Holistic View) are presented. This structure allows users to first grasp the chronological flow of the transition period and then deep-dive into specific, critical management areas. This design prioritizes both a macro-level understanding and micro-level actionable insights, catering to diverse user needs. -->
     <!-- Visualization & Content Choices: 
         - BCS Targets: Report Info -> BCS targets and risks. Goal -> Inform/Compare. Viz/Method -> Interactive HTML/CSS visual scale. Interaction -> User selects cow type to see target and clicks risk zones for details. Justification -> More engaging and intuitive than a static table. Method -> Vanilla JS + Tailwind.
         - DCAD Management: Report Info -> DCAD principles, targets vs. pasture levels, practical implementation, monitoring. Goal -> Compare/Explain/Organize. Viz/Method -> Chart.js Bar Chart, detailed text blocks, and key parameter cards. Interaction -> Static chart with clear labels, detailed information presented clearly. Justification -> Provides a comprehensive understanding of DCAD, its challenges in NZ, and how to implement it effectively. Method -> Chart.js + Vanilla JS + Tailwind.
@@ -18,8 +18,7 @@
         - Subclinical Ketosis & Testing: Report Info -> Ketosis impacts, testing methods (blood, urine, milk), interpretation. Goal -> Inform/Monitor. Viz/Method -> Detailed text blocks and information cards. Interaction -> Static display. Justification -> Provides crucial insights into a common metabolic disorder linked to transition stress. Method -> Vanilla JS + Tailwind.
         - Calcium & Phosphorus Recommendations: Report Info -> General dietary levels for Ca/P during transition. Goal -> Inform. Viz/Method -> Expanded text within existing mineral balance card. Interaction -> Static display. Justification -> Clarifies overall mineral needs beyond just milk fever prevention. Method -> Vanilla JS + Tailwind.
         - ME/DMI Requirements (Table 1) -> Goal: Inform/Compare -> Viz: Interactive Bar Chart (Chart.js) -> Interaction: Dropdown to select cow liveweight, dynamically updating chart -> Justification: Provides personalized energy targets more effectively than static data.
-        - Metabolic Diseases: Report Info -> Disease details. Goal -> Organize/Inform. Viz/Method -> Accordion-style list (HTML/JS). Interaction -> Clicking expands/collapses details. Justification -> Efficiently presents large text content. Method -> Vanilla JS + Tailwind.
-        - Wearable Tech Adoption: Report Info -> Adoption rates. Goal -> Inform. Viz/Method -> Simple Bar Chart (Chart.js). Interaction -> Static display. Justification -> Visually conveys trends. Method -> Chart.js.
+        - DCAD vs. Zeolite Comparison: Report Info -> DCAD and Zeolite mechanisms, benefits, and usage. Goal -> Compare/Organize. Viz/Method -> Tabbed HTML content within the "Priming" section. Interaction -> User clicks tabs to switch between DCAD and Zeolite information. Justification -> Allows for detailed comparison of two key pre-calving calcium management strategies. Method -> Vanilla JS + Tailwind.
         - Economic ROI: Report Info -> Key financial metrics (5:1 ROI, 5-10% production boost). Goal -> Inform/Impact. Viz/Method -> Large, bold HTML text cards ("Key Takeaways"). Interaction -> Static display. Justification -> Highlights the most compelling financial reasons for adopting these practices. Method -> Tailwind.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
@@ -186,8 +185,8 @@
             <!-- End Timeline Sections -->
 
             <!-- Detailed Sections from previous Transition Cow Guide -->
-            <section id="foundation" class="mb-16 scroll-mt-20">
-                <h3 class="text-2xl font-bold text-center mb-2 text-[#728C69]">The Foundation: Dry Period & Body Condition Score (BCS)</h3>
+            <section id="foundation-detailed" class="mb-16 scroll-mt-20">
+                <h3 class="text-2xl font-bold text-center mb-2 text-[#728C69]">The Foundation: Dry Period & Body Condition Score (BCS) - Detailed</h3>
                 <p class="text-center max-w-2xl mx-auto mb-8">A successful transition begins long before calving. Achieving the correct Body Condition Score (BCS) during the dry period is the single most important factor in preventing metabolic diseases and ensuring a productive lactation. This section helps you identify target BCS and understand the risks of missing those targets.</p>
                 
                 <div class="bg-white p-6 rounded-xl shadow-md">
@@ -223,7 +222,7 @@
                 </div>
             </section>
 
-            <section id="energy-intake" class="bg-white p-6 md:p-8 rounded-xl shadow-md mt-16">
+            <section id="energy-intake-detailed" class="bg-white p-6 md:p-8 rounded-xl shadow-md mt-16">
                 <h2 class="text-3xl font-bold text-center text-[#A47E3B] mb-4">Interactive Pre-Calving Energy Requirements</h2>
                 <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">Select a cow's liveweight to see the recommended daily Metabolisable Energy (ME) and Dry Matter Intake (DMI) targets during the pre-calving period. This helps prevent over-conditioning in fatter cows while ensuring thinner cows are adequately fed.</p>
                 <div class="flex justify-center mb-6">
@@ -240,7 +239,7 @@
                 </div>
             </section>
 
-            <section id="priming" class="mb-16 scroll-mt-20">
+            <section id="priming-detailed" class="mb-16 scroll-mt-20">
                 <h3 class="text-2xl font-bold text-center mb-2 text-[#728C69]">Priming the System: Pre-Calving (3 Weeks Out) - Detailed</h3>
                 <p class="text-center max-w-2xl mx-auto mb-8">This section provides a deeper dive into the strategies for ensuring adequate magnesium supply and managing the diet's DCAD to "wake up" her internal calcium mobilization systems.</p>
 
@@ -257,49 +256,95 @@
                     </div>
 
                     <div class="bg-white p-6 rounded-xl shadow-md">
-                        <h4 class="font-bold text-xl text-center mb-4">DCAD: Activating Calcium Reserves</h4>
-                        <p class="mb-4 text-sm">By feeding a negative Dietary Cation-Anion Difference (DCAD) diet, you induce a mild metabolic acidosis, which primes the cow to mobilize her own calcium reserves efficiently at calving. This proactive approach significantly reduces the risk of clinical and subclinical milk fever.</p>
-                        <div class="chart-container">
-                            <canvas id="dcadChart"></canvas>
-                        </div>
-                        <p class="text-center mt-4 text-sm">The chart above illustrates the stark contrast between typical NZ pasture DCAD and the target for pre-calving diets. This "metabolic training" activates the cow's endogenous calcium mobilization system, making her more efficient at drawing calcium from bone reserves and absorbing it from the diet *before* the massive demand of lactation begins.</p>
-
-                        <h5 class="font-bold text-lg mt-8 mb-2">Practical DCAD Implementation</h5>
-                        <p class="mb-4 text-sm">Optimal negative DCAD ranges are generally **-8 to -12 meq/100g DM**, but avoid going below -15 meq/100g DM to prevent excessive acidification and reduced feed intake. This diet is typically fed for the **last 2-3 weeks (14-21 days)** prior to expected calving, though up to 42 days can also be effective.</p>
+                        <h4 class="font-bold text-xl text-center mb-4">Pre-Calving Calcium Strategy: DCAD vs. Synthetic Zeolite</h4>
+                        <p class="mb-4 text-sm">Two primary strategies exist to prime the cow's calcium metabolism before calving. Explore their mechanisms, benefits, and practical considerations below.</p>
                         
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-6">
-                            <div class="p-3 bg-gray-50 rounded-md">
-                                <p class="font-semibold">Feed Analysis is Crucial:</p>
-                                <p>Thorough chemical analysis of feed ingredients is vital to accurately determine DCAD levels.</p>
-                            </div>
-                            <div class="p-3 bg-gray-50 rounded-md">
-                                <p class="font-semibold">Minimize High Potassium Forages:</p>
-                                <p>Avoid or limit effluent-grazed pastures or other high-potassium feeds.</p>
-                            </div>
-                            <div class="p-3 bg-gray-50 rounded-md">
-                                <p class="font-semibold">Anionic Supplements:</p>
-                                <p>To achieve a negative DCAD, the diet is adjusted with anionic supplements. Common examples include **magnesium sulphate** and **ammonium chloride**. These compounds provide negatively charged ions that help acidify the cow's blood, thereby stimulating her calcium mobilization system. Commercial anionic pre-calving nuts or pellets are also available in New Zealand, specifically formulated with these salts, along with starch, protein, vitamins, and trace minerals. These are typically fed at a rate of 2kg per cow per day. The choice of anionic salt depends on palatability, cost, and the specific dietary needs of the herd.</p>
-                            </div>
-                            <div class="p-3 bg-gray-50 rounded-md">
-                                <p class="font-semibold">Ensure Mineral Balance (Calcium & Phosphorus):</p>
-                                <p>Alongside DCAD adjustment, it is essential to provide adequate levels of other key minerals. Ensure sufficient **magnesium** (>0.40% DM), **calcium**, and **phosphorus**. While the DCAD diet aims to activate calcium mobilization, research shows that feeding more than **180 grams of dietary calcium** with a fully acidogenic diet makes cows more resistant to drops in serum calcium concentrations. This indicates that while restricting calcium *can* prime the system, ensuring sufficient overall calcium *intake* within an acidogenic diet is also beneficial. Phosphorus is crucial for energy metabolism and bone health; its balance with calcium is vital for overall mineral homeostasis.</p>
+                        <div class="mb-6 border-b border-gray-200">
+                            <div class="flex flex-wrap -mb-px justify-center">
+                                <button class="tab-button priming-tab active mr-2 mb-2 inline-block p-3 border-b-2 border-transparent rounded-t-lg" data-tab="dcad-strategy">DCAD Diet</button>
+                                <button class="tab-button priming-tab mb-2 inline-block p-3 border-b-2 border-transparent rounded-t-lg" data-tab="zeolite-strategy">Synthetic Zeolite</button>
                             </div>
                         </div>
 
-                        <h5 class="font-bold text-lg mt-8 mb-2">Monitoring DCAD Effectiveness</h5>
-                        <p class="mb-4 text-sm">Regular monitoring ensures your DCAD program is working as intended. Urine pH is a key indicator.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                            <div class="p-3 bg-blue-50 rounded-md">
-                                <p class="font-semibold">Urine pH Target (Holsteins):</p>
-                                <p><strong>6.0-6.8</strong>. Test at least 3 days after starting the DCAD diet.</p>
+                        <div id="priming-tab-content">
+                            <div class="priming-tab-pane active" id="dcad-strategy">
+                                <h5 class="font-bold text-lg mb-2">DCAD: Activating Calcium Reserves</h5>
+                                <p class="mb-4 text-sm">By feeding a negative Dietary Cation-Anion Difference (DCAD) diet, you induce a mild metabolic acidosis, which primes the cow to mobilize her own calcium reserves efficiently at calving. This proactive approach significantly reduces the risk of clinical and subclinical milk fever.</p>
+                                <div class="chart-container">
+                                    <canvas id="dcadChart"></canvas>
+                                </div>
+                                <p class="text-center mt-4 text-sm">The chart above illustrates the stark contrast between typical NZ pasture DCAD and the target for pre-calving diets. This "metabolic training" activates the cow's endogenous calcium mobilization system, making her more efficient at drawing calcium from bone reserves and absorbing it from the diet *before* the massive demand of lactation begins.</p>
+
+                                <h5 class="font-bold text-lg mt-8 mb-2">Practical DCAD Implementation</h5>
+                                <p class="mb-4 text-sm">Optimal negative DCAD ranges are generally **-8 to -12 meq/100g DM**, but avoid going below -15 meq/100g DM to prevent excessive acidification and reduced feed intake. This diet is typically fed for the **last 2-3 weeks (14-21 days)** prior to expected calving, though up to 42 days can also be effective.</p>
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-6">
+                                    <div class="p-3 bg-gray-50 rounded-md">
+                                        <p class="font-semibold">Feed Analysis is Crucial:</p>
+                                        <p>Thorough chemical analysis of feed ingredients is vital to accurately determine DCAD levels.</p>
+                                    </div>
+                                    <div class="p-3 bg-gray-50 rounded-md">
+                                        <p class="font-semibold">Minimize High Potassium Forages:</p>
+                                        <p>Avoid or limit effluent-grazed pastures or other high-potassium feeds.</p>
+                                    </div>
+                                    <div class="p-3 bg-gray-50 rounded-md">
+                                        <p class="font-semibold">Anionic Supplements:</p>
+                                        <p>To achieve a negative DCAD, the diet is adjusted with anionic supplements. Common examples include **magnesium sulphate** and **ammonium chloride**. These compounds provide negatively charged ions that help acidify the cow's blood, thereby stimulating her calcium mobilization system. Commercial anionic pre-calving nuts or pellets are also available in New Zealand, specifically formulated with these salts, along with starch, protein, vitamins, and trace minerals. These are typically fed at a rate of 2kg per cow per day. The choice of anionic salt depends on palatability, cost, and the specific dietary needs of the herd.</p>
+                                    </div>
+                                    <div class="p-3 bg-gray-50 rounded-md">
+                                        <p class="font-semibold">Ensure Mineral Balance (Calcium & Phosphorus):</p>
+                                        <p>Alongside DCAD adjustment, it is essential to provide adequate levels of other key minerals. Ensure sufficient **magnesium** (>0.40% DM), **calcium**, and **phosphorus**. While the DCAD diet aims to activate calcium mobilization, research shows that feeding more than **180 grams of dietary calcium** with a fully acidogenic diet makes cows more resistant to drops in serum calcium concentrations. This indicates that while restricting calcium *can* prime the system, ensuring sufficient overall calcium *intake* within an acidogenic diet is also beneficial. Phosphorus is crucial for energy metabolism and bone health; its balance with calcium is vital for overall mineral homeostasis.</p>
+                                    </div>
+                                </div>
+
+                                <h5 class="font-bold text-lg mt-8 mb-2">Monitoring DCAD Effectiveness</h5>
+                                <p class="mb-4 text-sm">Regular monitoring ensures your DCAD program is working as intended. Urine pH is a key indicator.</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                                    <div class="p-3 bg-blue-50 rounded-md">
+                                        <p class="font-semibold">Urine pH Target (Holsteins):</p>
+                                        <p><strong>6.0-6.8</strong>. Test at least 3 days after starting the DCAD diet.</p>
+                                    </div>
+                                    <div class="p-3 bg-blue-50 rounded-md">
+                                        <p class="font-semibold">Urine pH Target (Jerseys):</p>
+                                        <p><strong>5.5-6.0</strong>. Account for breed-specific metabolic differences.</p>
+                                    </div>
+                                    <div class="p-3 bg-blue-50 rounded-md col-span-full">
+                                        <p class="font-semibold">Blood Testing:</p>
+                                        <p>On day 3 calved cows, blood tests for energy and trace elements provide valuable feedback on transition progress. Note: DCAD diets can potentially harm reproduction in first-calf heifers; consult your nutritionist.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="p-3 bg-blue-50 rounded-md">
-                                <p class="font-semibold">Urine pH Target (Jerseys):</p>
-                                <p><strong>5.5-6.0</strong>. Account for breed-specific metabolic differences.</p>
-                            </div>
-                            <div class="p-3 bg-blue-50 rounded-md col-span-full">
-                                <p class="font-semibold">Blood Testing:</p>
-                                <p>On day 3 calved cows, blood tests for energy and trace elements provide valuable feedback on transition progress. Note: DCAD diets can potentially harm reproduction in first-calf heifers; consult your nutritionist.</p>
+
+                            <div class="priming-tab-pane hidden" id="zeolite-strategy">
+                                <h5 class="font-bold text-lg mb-2">Synthetic Zeolite: Calcium Binding for Activation</h5>
+                                <p class="mb-4 text-sm">Synthetic zeolite (e.g., RECALM) is a calcium binder that can be fed pre-calving to reduce dietary calcium absorption. This reduction in available calcium then stimulates the cow's own calcium mobilization mechanisms, effectively "training" her system for the post-calving demand.</p>
+                                
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm mb-6">
+                                    <div class="p-3 bg-green-50 rounded-md">
+                                        <p class="font-semibold">Mechanism:</p>
+                                        <p>Binds calcium in the gut, making it less available for absorption. This triggers the cow's homeostatic mechanisms (parathyroid hormone) to mobilize calcium from bone reserves.</p>
+                                    </div>
+                                    <div class="p-3 bg-green-50 rounded-md">
+                                        <p class="font-semibold">Feeding Duration:</p>
+                                        <p>Typically fed for **10-14 days** prior to calving.</p>
+                                    </div>
+                                    <div class="p-3 bg-green-50 rounded-md">
+                                        <p class="font-semibold">Effectiveness:</p>
+                                        <p>Studies show it can reduce the incidence of clinical milk fever by **80%** and subclinical hypocalcemia by **50%**.</p>
+                                    </div>
+                                    <div class="p-3 bg-green-50 rounded-md">
+                                        <p class="font-semibold">Palatability:</p>
+                                        <p>Generally highly palatable, making it easier to incorporate into the diet compared to some anionic salts.</p>
+                                    </div>
+                                    <div class="p-3 bg-green-50 rounded-md">
+                                        <p class="font-semibold">NZ Context:</p>
+                                        <p>Particularly effective in pasture-based systems where achieving a negative DCAD diet can be challenging due to naturally high potassium levels in grass.</p>
+                                    </div>
+                                    <div class="p-3 bg-green-50 rounded-md">
+                                        <p class="font-semibold">Considerations:</p>
+                                        <p>Requires precise timing and dosage. Consult with your nutritionist or veterinarian for specific product recommendations and feeding protocols.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -327,8 +372,8 @@
                 </div>
             </section>
 
-            <section id="calving" class="mb-16 scroll-mt-20">
-                <h3 class="text-2xl font-bold text-center mb-2 text-[#728C69]">The Main Event: Calcium Support At Calving</h3>
+            <section id="calving-detailed" class="mb-16 scroll-mt-20">
+                <h3 class="text-2xl font-bold text-center mb-2 text-[#728C69]">The Main Event: Calcium Support At Calving - Detailed</h3>
                 <p class="text-center max-w-2xl mx-auto mb-8">At calving, the demand for calcium explodes. Even with perfect pre-calving prep, direct calcium supplementation is crucial to prevent subclinical and clinical milk fever. This section compares the primary options for immediate support.</p>
                 
                 <div class="bg-white p-6 rounded-xl shadow-md">
@@ -498,7 +543,8 @@
                     </div>
                 </div>
             </section>
-            <!-- End Detailed Sections -->
+            
+            <!-- Removed Metabolic Disease Library and Technology Integration sections -->
 
         </main>
 
@@ -540,9 +586,14 @@
             const dcadCtx = document.getElementById('dcadChart').getContext('2d');
             let dcadChartInstance; // To store the Chart.js instance
 
-            // Elements for Calcium Strategy Tabs
+            // Elements for Calcium Strategy Tabs (Post-Calving)
             const tabButtons = document.querySelectorAll('.tab-button');
             const tabPanes = document.querySelectorAll('.tab-pane');
+
+            // Elements for Priming Section Tabs (DCAD vs Zeolite)
+            const primingTabButtons = document.querySelectorAll('.priming-tab');
+            const primingTabPanes = document.querySelectorAll('.priming-tab-pane');
+
 
             // Chart Creation Functions
             function createEnergyChart(weight) {
@@ -727,6 +778,7 @@
                 createEnergyChart(e.target.value);
             });
 
+            // Event listener for Post-Calving Calcium Strategy Tabs
             tabButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const tabId = button.getAttribute('data-tab');
@@ -745,6 +797,27 @@
                     });
                 });
             });
+
+            // Event listener for Priming Section Tabs (DCAD vs Zeolite)
+            primingTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    
+                    primingTabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    primingTabPanes.forEach(pane => {
+                        if (pane.id === tabId) {
+                            pane.classList.remove('hidden');
+                            pane.classList.add('active');
+                        } else {
+                            pane.classList.add('hidden');
+                            pane.classList.remove('active');
+                        }
+                    });
+                });
+            });
+
 
             // BCS target setting function
             function setBcsTargets(isMature) {
